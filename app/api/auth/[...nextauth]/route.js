@@ -11,7 +11,8 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_ID,
         })
     ],
-    async session({ session }){
+    callbacks : {
+    async session({ session }) {
         const sessionUser = await User.findOne({
             email: session.user.email
         })
@@ -41,6 +42,7 @@ const handler = NextAuth({
             console.log(error);
             return false
         }
+    }
     }
 })
 
